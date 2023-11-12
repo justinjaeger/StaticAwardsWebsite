@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting to Award Expert</title>
+</head>
+<body>
+    <h3 id="text">If you are not redirected <button id="redirect-button">click here</button></h3>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function createEmailLink(token, email) {
+            return 'oscar://signin/' + '?token=' + token + '&email=' + email;
+        };
+
+
+        const emailParam = getQueryParam('email');
+        const tokenParam = getQueryParam('token');
+
+        const deepLink = createEmailLink(tokenParam, emailParam);
+
+        if (deepLink) {
+            window.location.href = deepLink;
+        }
+
+        const redirectButton = document.getElementById('redirect-button')
+        redirectButton.onclick = () => {
+            console.log('deepLink',deepLink)
+            if (deepLink){
+                window.location.href = deepLink;
+            }
+        }
+    </script>
+</body>
+</html>
